@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include "element.h"
 #include "handler.h"
+#include "util.h"
 
 #define LEN(X) (sizeof X / sizeof X[0])
 
@@ -76,12 +77,12 @@ datahandler(void *ud, const XML_Char *s, int l)
 				break;
 			if(repeat) {
 				newlen = strlen(curdata) + l + 1;
-				curdata = realloc(curdata, newlen + 1);
+				curdata = erealloc(curdata, newlen + 1);
 				strncat(curdata, s, l);
 				curdata[newlen] = '\0';
 			}
 			else {
-				curdata = malloc(l + 1);
+				curdata = emalloc(l + 1);
 				strncpy(curdata, s, l);
 				curdata[l] = '\0';
 			}

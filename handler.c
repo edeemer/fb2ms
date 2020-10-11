@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "element.h"
+#include "util.h"
 
 extern Elements els;
 
@@ -115,7 +116,7 @@ descr_st()
 {
 	descr.title = descr.annotation = 0;
 
-	descr.authors = malloc(sizeof(Authorlist));
+	descr.authors = emalloc(sizeof(Authorlist));
 	memset(descr.authors, 0, sizeof(Authorlist));
 	return;
 }
@@ -154,13 +155,13 @@ author_st()
 	for(al = descr.authors; al->next; al = al->next)
 		printf("author skipped\n");
 	if(al->a == 0) {
-		al->a= malloc(sizeof(Author));
+		al->a= emalloc(sizeof(Author));
 		memset(al->a, 0, sizeof(Author));
 	}
 	else {
-		al->next = malloc(sizeof(Authorlist));
+		al->next = emalloc(sizeof(Authorlist));
 		memset(al->next, 0, sizeof(Authorlist));
-		al->next->a = malloc(sizeof(Author));
+		al->next->a = emalloc(sizeof(Author));
 		memset(al->next->a, 0, sizeof(Author));
 	}
 	return;
@@ -169,7 +170,7 @@ author_st()
 void
 booktitle_dat(char *data)
 {
-	descr.title = malloc(strlen(data) + 1);
+	descr.title = emalloc(strlen(data) + 1);
 	strcpy(descr.title, data);
 	return;
 }
@@ -182,7 +183,7 @@ firstname_dat(char *data)
 	if(isin(&els, "document-info"))
 		return;
 	for(al = descr.authors; al->next; al = al->next);
-	al->a->first = malloc(strlen(data) + 1);
+	al->a->first = emalloc(strlen(data) + 1);
 	strcpy(al->a->first, data);
 	return;
 }
@@ -196,7 +197,7 @@ midname_dat(char *data)
 		return;
 	for(al = descr.authors; al->next; al = al->next)
 		printf("!author skipped\n");
-	al->a->middle = malloc(strlen(data) + 1);
+	al->a->middle = emalloc(strlen(data) + 1);
 	strcpy(al->a->middle, data);
 	return;
 }
@@ -209,7 +210,7 @@ lastname_dat(char *data)
 	if(isin(&els, "document-info"))
 		return;
 	for(al = descr.authors; al->next; al = al->next);
-	al->a->last = malloc(strlen(data) + 1);
+	al->a->last = emalloc(strlen(data) + 1);
 	strcpy(al->a->last, data);
 	return;
 }
@@ -222,7 +223,7 @@ nickname_dat(char *data)
 	if(isin(&els, "document-info"))
 		return;
 	for(al = descr.authors; al->next; al = al->next);
-	al->a->nick = malloc(strlen(data) + 1);
+	al->a->nick = emalloc(strlen(data) + 1);
 	strcpy(al->a->nick, data);
 	return;
 }

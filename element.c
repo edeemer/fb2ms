@@ -1,19 +1,20 @@
 #include <stdlib.h>
 #include <string.h>
 #include "element.h"
+#include "util.h"
 
 void
 addel(Elements *e, const char *s)
 {
 	if(e->n == 0) {
 		if(e->el == 0) {
-			e->el = malloc(sizeof(char *));
+			e->el = emalloc(sizeof(char *));
 		}
 	}
 	else
-		e->el = realloc(e->el, (e->n + 1) * sizeof(char *));
+		e->el = erealloc(e->el, (e->n + 1) * sizeof(char *));
 	e->n++;
-	e->el[e->n - 1] = malloc(strlen(s) + 1);
+	e->el[e->n - 1] = emalloc(strlen(s) + 1);
 	strcpy(e->el[e->n - 1], s);
 }
 
@@ -24,7 +25,12 @@ rmel(Elements *e)
 		return;
 	free(e->el[e->n - 1]);
 	e->n--;
-	e->el = realloc(e->el, e->n * sizeof(char*));
+	if(e->n == 0) {
+		free(e->el);
+		e->el = 0;
+		return;
+	}
+	e->el = erealloc(e->el, e->n * sizeof(char*));
 }
 
 char *
