@@ -1,4 +1,5 @@
 #include <expat.h>
+#include <err.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -90,26 +91,47 @@ datahandler(void *ud, const XML_Char *s, int l)
 }
 
 int
-main(int argc, char *argv[])
+fb2ms(FILE *f)
 {
 	char buf[BUFSIZ];
-	int depth = 0;
 	int done;
 	int len;
 	XML_Parser parser;
-
-	memset(&els, 0, sizeof(Elements));
 	
 	parser = XML_ParserCreate("UTF-8");
-	XML_SetUserData(parser, &depth);
 	XML_SetElementHandler(parser, startel, endel);
 	XML_SetCharacterDataHandler(parser, datahandler);
 	do {
-		len = fread(buf, 1, sizeof(buf), stdin);
+		len = fread(buf, 1, sizeof(buf), f);
 		done = len < sizeof(buf);
 		if(XML_Parse(parser, buf, len, done) == XML_STATUS_ERROR)
       			return 1;
 	} while(!done);
 	XML_ParserFree(parser);
+	return 0;
+}
+
+int
+main(int argc, char *argv[])
+{
+	FILE *f;
+	int i;
+
+	memset(&els, 0, sizeof(Elements));
+	if(argc == 1) {
+		if(fb2ms(stdin) != 0)
+			warnx("XML parsing error");
+		return 0;	
+	}
+	for(i = 1; i < argc; i++) {
+		printf("%d of %d\n", i, argc);
+		f = fopen(argv[i], "r");
+		if(f == 0) {
+			warn("%s", argv[i]);
+			continue;
+		}
+		if(fb2ms(f) != 0)
+			warnx("%s: XML parsing error", argv[i]);	
+	}
 	return 0;
 }
