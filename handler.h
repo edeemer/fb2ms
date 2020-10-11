@@ -9,6 +9,7 @@ void sup_st();
 void sub_st();
 void epigr_st();
 void textauthor_st();
+void poem_st();
 void descr_end();
 void title_end();
 void emp_end();
@@ -17,7 +18,10 @@ void emptyline_end();
 void sup_end();
 void sub_end();
 void epigr_end();
+void poem_end();
 void textauthor_end();
+void v_end();
+void stanza_end();
 void booktitle_dat();
 void firstname_dat();
 void midname_dat();
@@ -58,4 +62,7 @@ Handler handlers[] = {
 	{"epigraph",	epigr_st,	epigr_end,	0},
 	{"text-author",	textauthor_st,	textauthor_end,	textauthor_dat},
 	{"sub",		sub_st,		sub_end,	sup_dat},
+	{"poem",	poem_st,	poem_end,	0},
+	{"v",		0,		v_end,		p_dat},
+	{"stanza",	0,		stanza_end,	0},
 };

@@ -422,3 +422,26 @@ textauthor_dat(char *data)
 	printf("%s", data);
 }
 
+void
+poem_st()
+{
+	printf(".RT\n.sp 1v\n.in +10\n");
+}
+
+void
+poem_end()
+{
+	printf(".in -10\n");
+}
+
+void
+v_end()
+{
+	printf("\n.br\n");
+}
+
+void
+stanza_end()
+{
+	printf(".sp 1v\n");
+}
