@@ -445,3 +445,19 @@ stanza_end()
 {
 	printf(".sp 1v\n");
 }
+
+void
+subtitle_st()
+{
+	if(isin(&els, "document-info"))
+		return;
+	printf(".DS C\n");
+}
+
+void
+subtitle_end()
+{
+	if(isin(&els, "document-info"))
+		return;
+	printf("\n.DE\n");
+}

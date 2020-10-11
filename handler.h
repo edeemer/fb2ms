@@ -10,6 +10,7 @@ void sub_st();
 void epigr_st();
 void textauthor_st();
 void poem_st();
+void subtitle_st();
 void descr_end();
 void title_end();
 void emp_end();
@@ -21,6 +22,7 @@ void epigr_end();
 void poem_end();
 void textauthor_end();
 void v_end();
+void subtitle_end();
 void stanza_end();
 void booktitle_dat();
 void firstname_dat();
@@ -52,7 +54,7 @@ Handler handlers[] = {
 	{"last-name",	0,		0,		lastname_dat},
 	{"nickname",	0,		0,		nickname_dat},
 	{"p",		p_st,		p_end,		p_dat},
-	{"subtitle",	p_st,		p_end,		p_dat},
+	{"subtitle",	subtitle_st,	subtitle_end,	p_dat},
 	{"title",	title_st,	title_end,	title_dat},
 	{"emphasis",	emp_st,		emp_end,	emp_dat},
 	{"strong",	strong_st,	strong_end,	strong_dat},
