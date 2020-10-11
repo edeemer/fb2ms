@@ -152,8 +152,7 @@ author_st()
 
 	if(isin(&els, "document-info"))
 		return;
-	for(al = descr.authors; al->next; al = al->next)
-		printf("author skipped\n");
+	for(al = descr.authors; al->next; al = al->next);
 	if(al->a == 0) {
 		al->a= emalloc(sizeof(Author));
 		memset(al->a, 0, sizeof(Author));
@@ -195,8 +194,7 @@ midname_dat(char *data)
 
 	if(isin(&els, "document-info"))
 		return;
-	for(al = descr.authors; al->next; al = al->next)
-		printf("!author skipped\n");
+	for(al = descr.authors; al->next; al = al->next);
 	al->a->middle = emalloc(strlen(data) + 1);
 	strcpy(al->a->middle, data);
 	return;
