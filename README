@@ -1,0 +1,26 @@
+Fb2ms is a program for converting e-books from FictionBook 2 format
+(fb2) to troff -ms macros. Produced output could be feed e. g. to
+nroff(1) to produce pretty formatted text file:
+
+	fb2ms <book.fb2 | nroff -ms >book.txt
+
+or to troff(1) for printable documents:
+
+	fb2ms <book.fb2 | troff -ms | dpost >book.ps
+
+The style could be changed easily by changing -ms macro files. But due
+to the lack of some fb2 features in -ms macros (such as poems and
+epigraphs), fb2ms produces pure troff instructions for those cases.
+
+Fb2ms does NOT support these essential features:
+	1. graphical images
+	2. tables
+	3. references at footnotes
+
+To compile a program execute
+
+	make
+
+in this directory. For installation run
+
+	make install
