@@ -17,7 +17,7 @@ Fb2ms does NOT support these essential features:
 	2. tables
 	3. references at footnotes
 
-To compile a program execute
+To compile a program you need to have Expat library. Then execute
 
 	make
 
