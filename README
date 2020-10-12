@@ -1,5 +1,5 @@
 Fb2ms is a program for converting e-books from FictionBook 2 format
-(fb2) to troff -ms macros. Produced output could be feed e. g. to
+(fb2) to troff -ms macros. Produced output could be fed e. g. to
 nroff(1) to produce pretty formatted text file:
 
 	fb2ms <book.fb2 | nroff -ms >book.txt
