@@ -83,7 +83,8 @@ freeauthors(Authorlist *list)
 	}	
 }
 
-/* TODO: works only with ASCII spaces, either preprocess data or include
+/*
+ * TODO: works only with ASCII spaces, either preprocess data or include
  * libutf in this program
  */
 
@@ -115,7 +116,6 @@ void
 descr_st()
 {
 	descr.title = descr.annotation = 0;
-
 	descr.authors = emalloc(sizeof(Authorlist));
 	memset(descr.authors, 0, sizeof(Authorlist));
 	return;
@@ -141,7 +141,7 @@ descr_end()
 			break;	
 	}
 	free(descr.title);
-	freeauthors(descr.authors);;
+	freeauthors(descr.authors);
 	return;
 }
 

@@ -1,5 +1,5 @@
-#include <expat.h>
 #include <err.h>
+#include <expat.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -13,7 +13,7 @@ Elements els;
 int repeat = 0;
 char *curdata = 0;
 
-void
+static void
 givedata()
 {
 	int i;
@@ -91,14 +91,14 @@ datahandler(void *ud, const XML_Char *s, int l)
 	}
 }
 
-int
+static int
 fb2ms(FILE *f)
 {
 	char buf[BUFSIZ];
 	int done;
 	int len;
 	XML_Parser parser;
-	
+
 	parser = XML_ParserCreate("UTF-8");
 	XML_SetElementHandler(parser, startel, endel);
 	XML_SetCharacterDataHandler(parser, datahandler);

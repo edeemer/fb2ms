@@ -7,9 +7,8 @@ void
 addel(Elements *e, const char *s)
 {
 	if(e->n == 0) {
-		if(e->el == 0) {
+		if(e->el == 0)
 			e->el = emalloc(sizeof(char *));
-		}
 	}
 	else
 		e->el = erealloc(e->el, (e->n + 1) * sizeof(char *));
@@ -43,7 +42,7 @@ int
 isin(Elements *e, char *s)
 {
 	int i;
-	
+
 	for(i = 0; i < e->n; i++) {
 		if(strcmp(e->el[i], s) == 0)
 			return 1;
