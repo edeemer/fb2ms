@@ -125,7 +125,6 @@ main(int argc, char *argv[])
 		return 0;	
 	}
 	for(i = 1; i < argc; i++) {
-		printf("%d of %d\n", i, argc);
 		f = fopen(argv[i], "r");
 		if(f == 0) {
 			warn("%s", argv[i]);
