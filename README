@@ -12,6 +12,14 @@ The style could be changed easily by changing -ms macro files. But due
 to the lack of some fb2 features in -ms macros (such as poems and
 epigraphs), fb2ms produces pure troff instructions for those cases.
 
+General usage:
+
+	fb2ms [-l] [file ...]
+
+If option -l is specified, then fb2ms will emit link and anchor escape
+sequences, which are extensions of Heirloom version of troff for PDF
+documents.
+
 Fb2ms does NOT support these essential features:
 	1. graphical images
 	2. tables
