@@ -6,6 +6,7 @@
 #include "util.h"
 
 extern Elements els;
+extern int linkflag;
 
 struct Author {
 	char *first;
@@ -135,6 +136,8 @@ putanchor(char **atts)
 {
 	int anow = 0;
 
+	if(!linkflag)
+		return;
 	while(*atts) {
 		if(anow) {
 			printf("\\A'%s'\n", *atts);
@@ -380,13 +383,15 @@ emptyline_end()
 void
 a_st(char **atts)
 {
-	puthref(atts);
+	if(linkflag)
+		puthref(atts);
 }
 
 void
 a_end()
 {
-	printf("\\T");
+	if(linkflag)
+		printf("\\T");
 }
 
 void

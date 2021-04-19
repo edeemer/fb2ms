@@ -13,6 +13,8 @@ Elements els;
 int repeat = 0;
 char *curdata = 0;
 
+int linkflag = 0;
+
 static void
 givedata()
 {
@@ -112,19 +114,35 @@ fb2ms(FILE *f)
 	return 0;
 }
 
+static void
+usage(char *pn)
+{
+	printf("usage: %s [-l] [file ...]\n", pn);
+	exit(1);
+}
+
 int
 main(int argc, char *argv[])
 {
 	FILE *f;
-	int i;
+	int i, ch;
 
 	memset(&els, 0, sizeof(Elements));
-	if(argc == 1) {
+	while((ch = getopt(argc, argv, "l")) != -1) {
+		switch(ch) {
+		case 'l':
+			linkflag = 1;
+			break;
+		default:
+			usage(argv[0]);
+		}
+	}
+	if(argc - optind == 0) {
 		if(fb2ms(stdin) != 0)
 			warnx("XML parsing error");
 		return 0;	
 	}
-	for(i = 1; i < argc; i++) {
+	for(i = optind; i < argc; i++) {
 		f = fopen(argv[i], "r");
 		if(f == 0) {
 			warn("%s", argv[i]);
