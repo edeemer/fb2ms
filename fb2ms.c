@@ -44,7 +44,7 @@ startel(void *ud, const XML_Char *name, const XML_Char **atts)
 		if(strcmp(handlers[i].name, name) == 0) {
 			if(handlers[i].fstart == 0)
 				break;
-			handlers[i].fstart();
+			handlers[i].fstart((char **)atts);
 		}
 	}
 }

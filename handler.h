@@ -1,3 +1,6 @@
+void putanchor();
+void a_st();
+void a_end();
 void a_dat();
 void author_st();
 void booktitle_dat();
@@ -39,14 +42,14 @@ void v_end();
 
 struct handler {
 	const char *name;
-	void (*fstart)(void);
+	void (*fstart)(char **);
 	void (*fend)(void);
 	void (*fdata)();
 };
 typedef struct handler Handler;
 
 Handler handlers[] = {
-	{"a",		0,		0,		a_dat},
+	{"a",		a_st,		a_end,		a_dat},
 	{"author",	author_st,	0,		0},
 	{"book-title",	0,		0,		booktitle_dat},
 	{"description",	descr_st,	descr_end,	0},
@@ -59,6 +62,7 @@ Handler handlers[] = {
 	{"nickname",	0,		0,		nickname_dat},
 	{"poem",	poem_st,	poem_end,	0},
 	{"p",		p_st,		p_end,		p_dat},
+	{"section",	putanchor,	0,		0},
 	{"stanza",	0,		stanza_end,	0},
 	{"strong",	strong_st,	strong_end,	strong_dat},
 	{"sub",		sub_st,		sub_end,	sup_dat},

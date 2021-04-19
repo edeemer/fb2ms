@@ -113,6 +113,40 @@ trimleft(char *s)
 }
 
 void
+puthref(char **atts)
+{
+	int hrefnow = 0;
+
+	while(*atts) {
+		if(hrefnow) {
+			if(*atts[0] == '#')
+				(*atts)++;
+			printf("\\T'%s'", *atts);
+			return;
+		}
+		if(strcmp(*atts, "l:href") == 0)
+			hrefnow = 1;
+		atts++;
+	}
+}
+
+void
+putanchor(char **atts)
+{
+	int anow = 0;
+
+	while(*atts) {
+		if(anow) {
+			printf("\\A'%s'\n", *atts);
+			return;
+		}
+		if(strcmp(*atts, "id") == 0)
+			anow = 1;
+		atts++;
+	}
+}
+
+void
 descr_st()
 {
 	descr.title = descr.annotation = 0;
@@ -341,6 +375,18 @@ emptyline_end()
 	if(isin(&els, "description"))
 		return;
 	puts("\n");
+}
+
+void
+a_st(char **atts)
+{
+	puthref(atts);
+}
+
+void
+a_end()
+{
+	printf("\\T");
 }
 
 void
