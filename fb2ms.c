@@ -117,7 +117,7 @@ fb2ms(FILE *f)
 static void
 usage(char *pn)
 {
-	printf("usage: %s [-l] [file ...]\n", pn);
+	fprintf(stderr, "usage: %s [-l] [file ...]\n", pn);
 	exit(1);
 }
 
