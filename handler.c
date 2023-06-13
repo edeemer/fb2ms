@@ -165,6 +165,8 @@ descr_end()
 
 	printf(".TL\n%s\n", descr.title);
 	al = descr.authors;
+	if(al == 0)
+		goto ret;
 	if(al->a)
 		puts(".AU");
 	while(1) {
@@ -177,8 +179,9 @@ descr_end()
 		else
 			break;	
 	}
-	free(descr.title);
+ret:	free(descr.title);
 	freeauthors(descr.authors);
+	descr.authors = 0;
 	return;
 }
 
@@ -188,6 +191,8 @@ author_st()
 	Authorlist *al;
 
 	if(isin(&els, "document-info"))
+		return;
+	if(descr.authors == 0)
 		return;
 	for(al = descr.authors; al->next; al = al->next);
 	if(al->a == 0) {
@@ -218,7 +223,11 @@ firstname_dat(char *data)
 
 	if(isin(&els, "document-info"))
 		return;
+	if(descr.authors == 0)
+		return;
 	for(al = descr.authors; al->next; al = al->next);
+	if(al->a == 0)
+		return;
 	al->a->first = emalloc(strlen(data) + 1);
 	strcpy(al->a->first, data);
 	return;
@@ -231,7 +240,11 @@ midname_dat(char *data)
 
 	if(isin(&els, "document-info"))
 		return;
+	if(descr.authors == 0)
+		return;
 	for(al = descr.authors; al->next; al = al->next);
+	if(al->a == 0)
+		return;
 	al->a->middle = emalloc(strlen(data) + 1);
 	strcpy(al->a->middle, data);
 	return;
@@ -244,7 +257,11 @@ lastname_dat(char *data)
 
 	if(isin(&els, "document-info"))
 		return;
+	if(descr.authors == 0)
+		return;
 	for(al = descr.authors; al->next; al = al->next);
+	if(al->a == 0)
+		return;
 	al->a->last = emalloc(strlen(data) + 1);
 	strcpy(al->a->last, data);
 	return;
@@ -257,7 +274,11 @@ nickname_dat(char *data)
 
 	if(isin(&els, "document-info"))
 		return;
+	if(descr.authors == 0)
+		return;
 	for(al = descr.authors; al->next; al = al->next);
+	if(al->a == 0)
+		return;
 	al->a->nick = emalloc(strlen(data) + 1);
 	strcpy(al->a->nick, data);
 	return;
